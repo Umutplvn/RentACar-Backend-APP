@@ -77,20 +77,21 @@ const UserSchema = new mongoose.Schema({
 const passwordEncrypt = require('../helpers/passwordEncrypt')
 
 // save: Only Create
-UserSchema.pre(['save', 'updateOne'], function(next) {
+//updateOne: To Update One 
+UserSchema.pre(['save', 'updateOne'], function(next) {  // password ve email bilgilerini db ye kaydetmeden once konrol yaptirabilmek icin pre('save', ...) komutunu kullandik. pre('init'...) ise db den veriyi alip ekrana basmadan once manipulasyonu saglar
 
     // get data from "this" when create;
     // if process is updateOne, data will receive in "this._update"
     const data = this?._update || this
 
-    // const emailRegExp = new RegExp("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$")
+    // const emailRegExp = new RegExp("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$")  //regexr.com dan validasyonu kontrol edilebilir
     // const isEmailValidated = emailRegExp.test(data.email)
     // const isEmailValidated = RegExp("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$").test(data.email)
-    const isEmailValidated = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email) // test from "data".
+    const isEmailValidated = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email) // test from "data".  // True or False
 
     if (isEmailValidated) {
 
-        const isPasswordValidated = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&].{8,}$/.test(data.password)
+        const isPasswordValidated = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&].{8,}$/.test(data.password) // True or False
     
         if (isPasswordValidated) {
             

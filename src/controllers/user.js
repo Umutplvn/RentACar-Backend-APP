@@ -118,7 +118,7 @@ module.exports = {
             req.body.isAdmin = false
         }
 
-        const data = await User.updateOne({ _id: req.params.id, ...filters }, req.body, { runValidators: true })
+        const data = await User.updateOne({ _id: req.params.id, ...filters }, req.body, { runValidators: true }) //  { runValidators: true } modeldeki validationu update icinde calistir
 
         res.status(200).send({
             error: false,

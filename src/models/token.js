@@ -24,7 +24,7 @@ const TokenSchema = new mongoose.Schema({
         type: String,
         trim: true,
         required: true,
-        index: true,
+        index: true,    //bu veriye daha hizli ve oncelikli erismemizi saglar
     }, 
 
 }, { collection: 'tokens', timestamps: true })

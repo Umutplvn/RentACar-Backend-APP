@@ -9,7 +9,7 @@ const Token = require('../models/token')
 module.exports = {
 
     list: async (req, res) => {
-        // #swagger.ignore = true
+        // #swagger.ignore = true   //swagger'a dahil olmayacak
 
         const data = await res.getModelList(Token)
 
